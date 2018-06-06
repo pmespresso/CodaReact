@@ -44,9 +44,9 @@ class Navigation extends Component {
 
   checkMetamask = () => {
     if (this.state.web3 !== 'undefined') {
-      this.refs.metamaskStatus.style = {"color": "#32CD32"};
+      this.refs.metamaskStatus.style.color = "#32CD32";
     } else {
-      this.refs.metamaskStatus.style = {"color": "red"};
+      this.refs.metamaskStatus.style.color = "red";
     }
   }
 
@@ -75,19 +75,19 @@ class Navigation extends Component {
             <Navbar.Brand>
               <Link to="/" className="nav-item">CODA</Link>
             </Navbar.Brand>
-            <span id="metamask-status" ref="metamaskStatus">Metamask Status</span>
+            <span ref="metamaskStatus">Metamask Status</span>
             <Navbar.Toggle />
           </Navbar.Header>
           <Navbar.Collapse>
               <Nav pullRight>
 
-                  <Link to="/discover-artists" className="nav-item" activeClassName='hurray'>
+                  <Link to="/discover-artists" className="nav-item">
                     Discover Artists
                   </Link>
-                  <Link to="/get-funded" className="nav-item" activeClassName='hurray'>
+                  <Link to="/get-funded" className="nav-item">
                     Get Funded
                   </Link>
-                  <Link to="/find-bounties" className="nav-item" activeClassName='hurray'>
+                  <Link to="/find-bounties" className="nav-item">
                     Find Bounties
                   </Link>
 

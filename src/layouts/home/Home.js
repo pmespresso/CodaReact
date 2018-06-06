@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 
-import { Button, Carousel, Panel, FormGroup, ControlLabel, FormControl, HelpBlock } from 'react-bootstrap';
+import { Button, Carousel, Panel, FormGroup, Image, Col, Grid, FormControl, HelpBlock } from 'react-bootstrap';
 
 import './Home.css';
+
+import icon_discover from './discover.png';
+import icon_invest from './invest.png';
+import icon_empower from './empower.png';
+
 
 class Home extends Component {
 
@@ -26,10 +31,35 @@ class Home extends Component {
           caption: 'Hip Hop meets country',
           img: './banjo.jpg'
         }
+      ],
+      productionAssistanceOptions: [
+        {
+          title: 'Producers',
+          img: './producer.jpg'
+        },
+        {
+          title: 'Female Singers',
+          img: './f_singer.jpg'
+        },
+        {
+          title: 'Male Singers',
+          img: './m_singer.jpg'
+        },
+        {
+          title: 'Mixing Engineers',
+          img: './mixing_eng.jpg'
+        },
+        {
+          title: 'Songwriters',
+          img: './songwriters.jpg'
+        },
+        {
+          title: 'Beatmakers',
+          img: './beatmakers.jpg'
+        }
       ]
     }
   }
-
 
   render() {
     function FieldGroup({ id, label, help, ...props }) {
@@ -62,16 +92,24 @@ class Home extends Component {
 
       <main className="container">
         <section className="row">
+        <div className="section-header">
+          <h2> What is Coda? </h2>
+          <h4>A Proposal For A New Record Label Structure</h4>
+          <p>Facilitating artist equity (token) issuance in exchange for financing and crowdsourced production services. </p>
+        </div>
           <section id="what">
-            <h2 className="section-header"> What is Coda? </h2>
+
             <div className="cards-list">
-              <Panel>
+              <Panel className="card" >
+                <img src={icon_discover} className="card-icon"/>
                 <Panel.Body>Discover Independent Musicians</Panel.Body>
               </Panel>
-              <Panel>
+              <Panel className="card">
+                <img src={icon_invest}  className="card-icon"/>
                 <Panel.Body>Invest & Collaborate</Panel.Body>
               </Panel>
-              <Panel>
+              <Panel className="card">
+                <img src={icon_empower} className="card-icon"/>
                 <Panel.Body>Empower Artists </Panel.Body>
               </Panel>
             </div>
@@ -108,9 +146,9 @@ class Home extends Component {
                           <Panel.Title>{item.title}</Panel.Title>
                           <img src={item.img} className="artist-card-img"/>
 
-                          <div style={{display: 'flex', justifyContent: 'space-around', padding: 10}}>
+                          <div>
                             {item.caption}
-                            <Button bsStyle="success" bsSize="sm">View Offering</Button>
+                            <Button className="pull-right offeringBtn" bsStyle="success" bsSize="sm">View Offering</Button>
                           </div>
                         </Panel.Body>
                       </Panel>
@@ -120,6 +158,27 @@ class Home extends Component {
               </div>
 
           </section>
+        </section>
+
+
+        <section className="row">
+          <section id="production-help">
+            <h2 className="section-header"> Need Assistance with Production? </h2>
+          </section>
+
+          <Grid className="cards-list">
+            {
+              this.state.productionAssistanceOptions.map((option, key) => {
+                return (
+                  <Col md={4} key={key} style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                    <Image src={option.img} style={{maxWidth: '100%', zIndex: -100, position: 'absolute'}} />
+                    <h1 style={{color: 'white', zIndex: 100}}>{option.title}</h1>
+                  </Col>
+                )
+              })
+            }
+          </Grid>
+
         </section>
       </main>
     </div>

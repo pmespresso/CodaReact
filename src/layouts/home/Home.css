@@ -43,12 +43,11 @@ section {
   height: 50px;
 }
 
-.card {
-
-}
-
 .cards-list {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .cards-list > * {
@@ -60,4 +59,22 @@ section {
 
 .artist-card-img {
   max-width: 100%;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: none;
+  border: none;
+}
+
+.card-icon {
+  flex: 1.7;
+}
+
+.panel-body {
+  flex: 1;
+  font-size: 18px;
+  font-weight: 500;
 }
