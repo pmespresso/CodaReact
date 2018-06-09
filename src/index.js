@@ -12,13 +12,15 @@ import App from './App'
 import Home from './layouts/home/Home'
 import About from './layouts/about/About'
 import Dashboard from './layouts/dashboard/Dashboard'
-import Profile from './user/layouts/profile/Profile'
+import Profile from './layouts/user//Profile'
 import DiscoverArtists from './layouts/discover/DiscoverArtists';
 import Funding from './layouts/funding/Funding';
 
+import KANYE_OFFERING_EXAMPLE from './layouts/discover/KANYEOFFERINGEXAMPLE';
+
 // Redux Store
 import store from './store'
-
+//
 const history = syncHistoryWithStore(browserHistory, store)
 
 ReactDOM.render((
@@ -31,12 +33,8 @@ ReactDOM.render((
           <Route path="/how-it-works" component={About} />
           <Route path="/discover-artists" component={DiscoverArtists}/>
           <Route path="/get-funded" component={Funding}/>
-          <Route path="/collaborate"/>
+          <Route path="/kanye_offering_example" component={KANYE_OFFERING_EXAMPLE}/>
           <Route path="/find-bounties"/>
-          <Route path="/recording-space"/>
-          <Route path="/dj_offering_example"/>
-          <Route path="/classical_offering_examplee"/>
-          <Route path="/hipcountry_offering_example"/>
         </Route>
       </Router>
     </Provider>

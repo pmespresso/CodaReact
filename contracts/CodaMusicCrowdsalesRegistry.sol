@@ -24,6 +24,9 @@ contract CodaMusicCrowdsalesRegistry {
   // user (address => (crowdsale => token))
   mapping(address => mapping(address => CodaMusicToken)) public launches;
 
+  // crowdsale => token
+  /* mapping(address => address) public crowdsales; */
+
   function deployCrowdsale(uint256 _rate, address _crowdsaleWallet, CodaMusicToken _token) public returns (address){
     CodaMusicCrowdsale newCodaMusicCrowdsale = (new CodaMusicCrowdsale(_rate, _crowdsaleWallet, _token));
     launches[msg.sender][address(newCodaMusicCrowdsale)] = CodaMusicToken(_token);
@@ -32,6 +35,7 @@ contract CodaMusicCrowdsalesRegistry {
     owners[msg.sender].push(newCrowdsaleStruct);
 
     emit CrowdsaleDeployed(newCodaMusicCrowdsale, _token);
+
     return address(newCodaMusicCrowdsale);
   }
 
@@ -45,5 +49,9 @@ contract CodaMusicCrowdsalesRegistry {
 
   function balanceOf(address crowdsale, address user) constant returns (uint256) {
     return contributions[user][crowdsale];
+  }
+
+  function buy(address crowdsale_address, address beneficiary) public payable {
+    CodaMusicCrowdsale(crowdsale_address).buyTokens(beneficiary);
   }
 }

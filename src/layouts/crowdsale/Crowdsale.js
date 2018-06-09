@@ -16,5 +16,10 @@ import getWeb3 from '../../util/getWeb3';
 import '../../App.css';
 
 export default class Crowdsale extends Component {
+  render() {
 
+
+      })
+    )
+  }
 }

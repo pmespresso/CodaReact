@@ -290,7 +290,7 @@ class Funding extends Component {
           this.state.stage === 'crowdsale'
           ?
             <Col md={5}>
-              <Panel style={{height: 500, textAlign: 'center'}}>
+              <Panel style={{height: 600, textAlign: 'center'}}>
                 <Panel.Title><h2>Launch Your Crowdsale</h2></Panel.Title>
                 <Panel.Body style={{display: 'flex column'}}>
                 <strong>Token to Sell: </strong><input type="text" className="form-control bottom-margin-20" id="SetCrowdSaleToken" ref="SetCrowdSaleToken" placeholder="e.g. 0x230dsa9191f2190ds414ah3fjdfa12"/>
@@ -309,7 +309,7 @@ class Funding extends Component {
             </Col>
           :
           <Col md={5}>
-            <Panel style={{height: 500, textAlign: 'center'}}>
+            <Panel style={{height: 600, textAlign: 'center'}}>
               <Panel.Title><h2>Create A New Token For Your Album</h2></Panel.Title>
               <Panel.Body style={{display: 'flex column'}}>
                 <div><strong>Album or Project Title: </strong><input type="text" className="form-control bottom-margin-20" ref="SetProjectTitle" placeholder="e.g. Radio Nights"/></div>
@@ -317,7 +317,7 @@ class Funding extends Component {
                 <div><strong>Artist Ethereum Wallet: </strong><input type="text" className="form-control bottom-margin-20" ref="SetArtistWallet" placeholder="e.g. 0x16B0dc30B9aD80Fb6fC352496CAaCA64ED082e9c"/></div>
                 <div><strong>Set Token Symbol: </strong><input type="text" className="form-control bottom-margin-20" ref="SetTokenSymbol" placeholder="e.g. RDN"/></div>
                 <div><strong>Token Supply: </strong><input type="text" className="form-control bottom-margin-20" ref="SetTokenSupply" placeholder="e.g. 200000000"/></div>
-                <button onClick={this.handleCreateToken} className="btn btn-lg btn-success pull-right" ref="createNewProjectOfferingButton">Create Project Offering</button>
+                <button onClick={this.handleCreateToken} className="btn btn-lg btn-success pull-right" ref="createNewProjectOfferingButton">Deploy Token</button>
               </Panel.Body>
             </Panel>
             <Button className="pull-right" id="crowdsale_configuration" onClick={this.handleCrowdsaleConfig}>Start Crowdsale Configuration</Button>

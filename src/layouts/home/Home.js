@@ -8,6 +8,10 @@ import icon_discover from './discover.png';
 import icon_invest from './invest.png';
 import icon_empower from './empower.png';
 
+import { fetchCrowdsales } from './actions/homeActions';
+import { connect } from 'react-redux';
+
+import {Crowdsales} from '../crowdsale/Crowdsales';
 
 class Home extends Component {
 
@@ -138,25 +142,8 @@ class Home extends Component {
           <section id="discover-artists">
             <h2 className="section-header"> Discover Artists </h2>
               <div className="cards-list">
-              {
-                this.state.artistsWithOfferings.slice(0, 3).map((item, key) => {
-                    return (
-                      <Panel key={key} className="card">
-                        <Panel.Body>
-                          <Panel.Title>{item.title}</Panel.Title>
-                          <img src={item.img} className="artist-card-img"/>
 
-                          <div>
-                            {item.caption}
-                            <Button className="pull-right offeringBtn" bsStyle="success" bsSize="sm">View Offering</Button>
-                          </div>
-                        </Panel.Body>
-                      </Panel>
-                    )
-                })
-              }
               </div>
-
           </section>
         </section>
 
@@ -166,7 +153,7 @@ class Home extends Component {
             <h2 className="section-header"> Need Assistance with Production? </h2>
           </section>
 
-          <Grid className="cards-list">
+          <Grid className="cards-list" style={{display: 'flex', justifyContent: 'center'}}>
             {
               this.state.productionAssistanceOptions.map((option, key) => {
                 return (
@@ -185,5 +172,6 @@ class Home extends Component {
     )
   }
 }
+
 
 export default Home;
