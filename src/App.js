@@ -3,11 +3,11 @@ import { Link } from 'react-router'
 import { HiddenOnlyAuth, VisibleOnlyAuth } from './util/wrappers.js'
 
 // UI Components
-import LoginButtonContainer from './layouts/user/ui/loginbutton/LoginButtonContainer'
-import LogoutButtonContainer from './layouts/user/ui/logoutbutton/LogoutButtonContainer'
-import Navigation from './layouts/nav/Navigation';
+import LoginButtonContainer from './containers/user/ui/loginbutton/LoginButtonContainer'
+import LogoutButtonContainer from './containers/user/ui/logoutbutton/LogoutButtonContainer'
+import Navigation from './containers/nav/Navigation';
 import {Navbar, NavItem, Nav, MenuItem, NavDropdown} from 'react-bootstrap';
-import About from './layouts/about/About';
+import About from './containers/about/About';
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 

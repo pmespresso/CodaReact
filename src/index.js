@@ -9,14 +9,14 @@ import { Web3Provider } from 'react-web3';
 
 // Layouts
 import App from './App'
-import Home from './layouts/home/Home'
-import About from './layouts/about/About'
-import Dashboard from './layouts/dashboard/Dashboard'
-import Profile from './layouts/user//Profile'
-import DiscoverArtists from './layouts/discover/DiscoverArtists';
-import Funding from './layouts/funding/Funding';
+import Home from './containers/home/Home'
+import About from './containers/about/About'
+import Dashboard from './containers/dashboard/Dashboard'
+import Profile from './containers/user//Profile'
+import DiscoverArtists from './containers/discover/DiscoverArtists';
+import Funding from './containers/funding/Funding';
 
-import KANYE_OFFERING_EXAMPLE from './layouts/discover/KANYEOFFERINGEXAMPLE';
+import KANYE_OFFERING_EXAMPLE from './containers/discover/KANYEOFFERINGEXAMPLE';
 
 // Redux Store
 import store from './store'

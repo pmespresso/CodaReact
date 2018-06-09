@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
-import PageHeader from '../page_header/PageHeader';
+import PageHeader from '../../components/PageHeader';
 import { Button, Panel, Col, Row} from 'react-bootstrap';
 
 import { Link } from 'react-router';
