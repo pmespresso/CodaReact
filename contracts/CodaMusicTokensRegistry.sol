@@ -1,4 +1,4 @@
-pragma solidity ^0.4.17;
+pragma solidity ^0.4.19;
 import './CodaMusicToken.sol';
 
 contract CodaMusicTokensRegistry {
@@ -19,12 +19,18 @@ contract CodaMusicTokensRegistry {
 
   /* mapping (user address => token addresses) public owners; */
   mapping (address => address[]) public owners;
-  //mapping of token addresses to mapping of account balances (token=0 means Ether)
+  //mapping of token addresses to mapping of accounts to their balances (token=0 means Ether)
   mapping (address => mapping (address => uint256)) public token_balances;
 
-  address[] public tokens;
+  /* one to one mapping of token to owner */
+  mapping(address => address) public tokenToOwner;
 
   modifier onlyCEO() {
+    _;
+  }
+
+  modifier onlyTokenOwner() {
+    //TODO:
     _;
   }
 
@@ -41,7 +47,7 @@ contract CodaMusicTokensRegistry {
     CodaMusicToken newCodaToken = (new CodaMusicToken(_name, _symbol, _decimals, _total_supply));
 
   	owners[msg.sender].push(newCodaToken);
-    tokens.push(newCodaToken);
+    tokenToOwner[newCodaToken] = msg.sender;
 
     token_balances[newCodaToken][msg.sender] = _total_supply;
 
@@ -66,11 +72,24 @@ contract CodaMusicTokensRegistry {
   }
 
 	function getTokenAtIndex(address token_owner, uint256 token_index) public view returns(string, string, address, address, uint256, uint256, uint256) {
-    assert(token_owner != address(0));
-    assert(token_index >= 0);
+    require(token_owner != address(0));
+    require(token_index >= 0);
 
     CodaMusicToken token = CodaMusicToken(owners[token_owner][token_index]);
 
     return token.getDetails();
 	}
+
+  function burnToken(address _token, uint256 _value) public onlyTokenOwner() {
+    CodaMusicToken(_token).burn(_value);
+  }
+
+  function transferOwnership(address _token, address _newOwner) public {
+    CodaMusicToken(_token).transferOwnership(_newOwner);
+  }
+
+  function mint(address _token, address _to, uint256 _value) public returns (bool) {
+    return CodaMusicToken(_token).mint(_to, _value);
+  }
+
 }
