@@ -5,7 +5,7 @@ import { HiddenOnlyAuth, VisibleOnlyAuth } from '../../util/wrappers.js'
 // UI Components
 import LoginButtonContainer from '../user/ui/loginbutton/LoginButtonContainer'
 import LogoutButtonContainer from '../user/ui/logoutbutton/LogoutButtonContainer'
-import About from '../about/About';
+import About from '../../components/about/About';
 
 import './Nav.css'
 import {Navbar, NavItem, Nav, MenuItem, NavDropdown} from 'react-bootstrap';
@@ -51,60 +51,31 @@ class Navigation extends Component {
   }
 
   render() {
-    const OnlyAuthLinks = VisibleOnlyAuth(() =>
-      <span>
-        <li className="pure-menu-item">
-          <Link to="/dashboard" className="pure-menu-link">Dashboard</Link>
-        </li>
-        <li className="pure-menu-item">
-          <Link to="/profile" className="pure-menu-link">Profile</Link>
-        </li>
-        <LogoutButtonContainer />
-      </span>
-    )
-
-    const OnlyGuestLinks = HiddenOnlyAuth(() =>
-      <span>
-        <LoginButtonContainer />
-      </span>
-    )
-
     return(
       <Navbar className="navbar" collapseOnSelect>
-          <Navbar.Header>
-            <Navbar.Brand>
-              <Link to="/" className="nav-item">CODA</Link>
-            </Navbar.Brand>
-            <span ref="metamaskStatus">Metamask Status</span>
-            <Navbar.Toggle />
-          </Navbar.Header>
-          <Navbar.Collapse>
-              <Nav pullRight>
-
-                  <Link to="/discover-artists" className="nav-item">
-                    Discover Artists
-                  </Link>
-                  <Link to="/get-funded" className="nav-item">
-                    Get Funded
-                  </Link>
-                  <Link to="/find-bounties" className="nav-item">
-                    Find Bounties
-                  </Link>
-
-              </Nav>
-          </Navbar.Collapse>
-
+        <Navbar.Header>
+          <Navbar.Brand>
+            <Link to="/" router.push className="nav-item">CODA</Link>
+          </Navbar.Brand>
+          <span ref="metamaskStatus">Metamask Status</span>
+          <Navbar.Toggle />
+        </Navbar.Header>
+        <Navbar.Collapse>
+            <Nav pullRight>
+              <NavLink to="/discover-artists" className="nav-item">
+                Discover Artists
+              </NavLink>
+              <NavLink to="/get-funded" className="nav-item">
+                Get Funded
+              </NavLink>
+              <NavLink to="/find-bounties" className="nav-item">
+                Find Bounties
+              </NavLink>
+            </Nav>
+        </Navbar.Collapse>
       </Navbar>
     )
   }
 }
 
 export default Navigation;
-
-// <Link to="/how-it-works" className="nav-item" activeClassName='hurray'>
-//   How It Works
-// </Link>
-
-// <Link to="/recording-space" className="nav-item" activeClassName='hurray'>
-//   Get Recording Space
-// </Link>

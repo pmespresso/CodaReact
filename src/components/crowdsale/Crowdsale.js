@@ -3,7 +3,7 @@ import _ from 'lodash';
 import PageHeader from '../../components/PageHeader';
 import { Button, Panel, Col, Row} from 'react-bootstrap';
 
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
 import CodaMusicCrowdsalesRegistry from '../../../build/contracts/CodaMusicCrowdsalesRegistry.json';
 

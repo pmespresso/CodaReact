@@ -7,13 +7,17 @@ import LoginButtonContainer from './containers/user/ui/loginbutton/LoginButtonCo
 import LogoutButtonContainer from './containers/user/ui/logoutbutton/LogoutButtonContainer'
 import Navigation from './containers/nav/Navigation';
 import {Navbar, NavItem, Nav, MenuItem, NavDropdown} from 'react-bootstrap';
-import About from './containers/about/About';
+import About from './components/about/About';
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 // contract stuff
 import CodaMusicTokensRegistry from '../build/contracts/CodaMusicTokensRegistry.json'
 import getWeb3 from './util/getWeb3';
+
+//router history
+// import createBrowserHistory from 'history/createBrowserHistory'
+// const customHistory = createBrowserHistory()
 
 // redux
 import { Provider } from 'react-redux';
@@ -29,24 +33,6 @@ import './App.css'
 class App extends Component {
 
   render() {
-    const OnlyAuthLinks = VisibleOnlyAuth(() =>
-      <span>
-        <li className="pure-menu-item">
-          <Link to="/dashboard" className="pure-menu-link">Dashboard</Link>
-        </li>
-        <li className="pure-menu-item">
-          <Link to="/profile" className="pure-menu-link">Profile</Link>
-        </li>
-        <LogoutButtonContainer />
-      </span>
-    )
-
-    const OnlyGuestLinks = HiddenOnlyAuth(() =>
-      <span>
-        <LoginButtonContainer />
-      </span>
-    )
-
     return (
 
       <Provider store={store}>

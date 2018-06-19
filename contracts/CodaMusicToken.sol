@@ -9,21 +9,22 @@ contract CodaMusicToken is StandardBurnableToken, Ownable {
 
 	string public name;
 	string public symbol;
+	address public owner;
 	uint256 public decimals;
-	uint256 public total_supply;
-	uint256 public deployed_time;
+	uint256 public deployedTime_;
 
 	function CodaMusicToken(string _name, string _symbol, uint256 _decimals, uint256 _total_supply) public Ownable() {
+		balances[msg.sender] = _total_supply; // this sets the registry to own all the tokens
+
 		name = _name;
 		symbol = _symbol;
 		decimals = _decimals;
-
-		deployed_time = now;
-
-		total_supply = _total_supply;
-
+		totalSupply_ = _total_supply;
+		deployedTime_ = now;
 		owner = tx.origin;
 	}
 
-
+	function getDetails() public view returns (string, string, address, address, uint256, uint256, uint256) {
+		return (name, symbol, owner, address(this), decimals, deployedTime_, totalSupply_);
+	}
 }
