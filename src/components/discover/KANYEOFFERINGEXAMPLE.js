@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
-import PageHeader from '../page_header/PageHeader';
+import PageHeader from '../../components/page_header/PageHeader';
 import { Link } from 'react-router'
 
 import { Button, Panel, Image, Modal, OverlayTrigger, Popover, Tooltip } from 'react-bootstrap';
@@ -13,8 +13,8 @@ import getWeb3 from '../../util/getWeb3';
 
 export default class KANYEOFFERINGEXAMPLE extends Component {
 
-  constructor() {
-    super();
+  constructor(props, context) {
+    super(props, context);
 
     this.state = {
       show: false
@@ -88,7 +88,6 @@ export default class KANYEOFFERINGEXAMPLE extends Component {
     this.state.contracts.codaMusicCrowdsalesRegistry.deployed().then(function(instance) {
 
       instance.buy(crowdsale_address, _this.state.account, {from: _this.state.account, to: crowdsale_address, value: 10000, gas: 210000});
-
 
       /// SUPER HACK
       setTimeout(  () => {_this.handleShow()}, 8000)

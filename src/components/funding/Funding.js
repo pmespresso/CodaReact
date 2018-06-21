@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
-import PageHeader from '../page_header/PageHeader';
+import PageHeader from '../../components/page_header/PageHeader';
 import { Button, Panel, Col, Row} from 'react-bootstrap';
 
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
 import CodaMusicTokensRegistry from '../../../build/contracts/CodaMusicTokensRegistry.json';
 
@@ -12,6 +12,8 @@ import CodaMusicCrowdsalesRegistry from '../../../build/contracts/CodaMusicCrowd
 import TruffleContract from 'truffle-contract';
 
 import getWeb3 from '../../util/getWeb3';
+
+// import { fetchCrowdsales } from '../../actions';
 
 import '../../App.css';
 
@@ -54,6 +56,11 @@ class Funding extends Component {
     .catch(() => {
       console.log('Error finding web3.')
     })
+  }
+
+  componentDidMount = () => {
+    const { dispatch } = this.props;
+    // dispatch(fetchCrowdsales())
   }
 
   instantiateContract = () => {
@@ -107,6 +114,11 @@ class Funding extends Component {
             userWalletBalance: res
           })
         });
+
+        /*** Migrating to Redux ***/
+        // dispatch({
+        //   type: 'ADD_NEW_CROWDSALE'
+        // })
 
 
         var promises = [];

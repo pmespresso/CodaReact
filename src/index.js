@@ -9,17 +9,19 @@ import { Web3Provider } from 'react-web3';
 
 // Layouts
 import App from './App'
-import Home from './layouts/home/Home'
-import About from './layouts/about/About'
-import Dashboard from './layouts/dashboard/Dashboard'
-import Profile from './layouts/user//Profile'
-import DiscoverArtists from './layouts/discover/DiscoverArtists';
-import Funding from './layouts/funding/Funding';
+import Home from './components/home/Home'
+import About from './components/about/About'
+import Dashboard from './components/dashboard/Dashboard'
+import Profile from './containers/user/Profile'
+import DiscoverArtists from './components/discover/DiscoverArtists';
+import Funding from './components/funding/Funding';
 
-import KANYE_OFFERING_EXAMPLE from './layouts/discover/KANYEOFFERINGEXAMPLE';
+import KANYE_OFFERING_EXAMPLE from './components/discover/KANYEOFFERINGEXAMPLE';
 
 // Redux Store
 import store from './store'
+
+console.log('initial state => ', store.getState());
 //
 const history = syncHistoryWithStore(browserHistory, store)
 

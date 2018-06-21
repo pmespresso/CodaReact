@@ -9,14 +9,7 @@ contract CodaMusicCrowdsalesRegistry {
 
   event CrowdsaleDeployed(address crowdsale, address token);
 
-  struct Crowdsale {
-    address crowdsale_address;
-    address owner_address;
-    address token_address;
-    uint256 rate;
-  }
-
-  mapping(address => Crowdsale[]) public owners;
+  mapping(address => CodaMusicCrowdsale[]) public owners;
 
   // user (address => (crowdsale => amount))
   mapping(address => mapping(address => uint256)) public contributions;
@@ -24,15 +17,11 @@ contract CodaMusicCrowdsalesRegistry {
   // user (address => (crowdsale => token))
   mapping(address => mapping(address => CodaMusicToken)) public launches;
 
-  // crowdsale => token
-  /* mapping(address => address) public crowdsales; */
-
   function deployCrowdsale(uint256 _rate, address _crowdsaleWallet, CodaMusicToken _token) public returns (address){
     CodaMusicCrowdsale newCodaMusicCrowdsale = (new CodaMusicCrowdsale(_rate, _crowdsaleWallet, _token));
     launches[msg.sender][address(newCodaMusicCrowdsale)] = CodaMusicToken(_token);
 
-    Crowdsale memory newCrowdsaleStruct = Crowdsale(_crowdsaleWallet, msg.sender, _token, _rate);
-    owners[msg.sender].push(newCrowdsaleStruct);
+    owners[msg.sender].push(newCodaMusicCrowdsale);
 
     emit CrowdsaleDeployed(newCodaMusicCrowdsale, _token);
 
@@ -43,12 +32,21 @@ contract CodaMusicCrowdsalesRegistry {
     return owners[user].length;
   }
 
-  function getCrowdsaleAtIndex(address addr, uint256 crowdsale_index) public view returns(address, address, address, uint256) {
-    return (owners[addr][crowdsale_index].crowdsale_address, owners[addr][crowdsale_index].owner_address, owners[addr][crowdsale_index].token_address, owners[addr][crowdsale_index].rate);
+  function getCrowdsaleAtIndex(address crowdsale_owner, uint256 crowdsale_index) public view returns(address, address, uint256, uint256) {
+    require(crowdsale_owner != address(0));
+    require(crowdsale_index >= 0);
+
+    CodaMusicCrowdsale crowdsale = CodaMusicCrowdsale(owners[crowdsale_owner][crowdsale_index]);
+
+    return crowdsale.getDetails();
   }
 
-  function balanceOf(address crowdsale, address user) constant returns (uint256) {
-    return contributions[user][crowdsale];
+  function etherBalanceOf(address crowdsale) view returns (uint256) {
+    return crowdsale.balance;
+  }
+
+  function getWeiRaisedBy(address crowdsale) view returns (uint256) {
+    return CodaMusicCrowdsale(crowdsale).getWeiRaised();
   }
 
   function buy(address crowdsale_address, address beneficiary) public payable {

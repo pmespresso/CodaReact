@@ -1,3 +1,0 @@
-export const FETCH_CROWDSALES = 'FETCH_CROWDSALES';
-
-export const NEW_CROWDSALE = 'NEW_CROWDSALE';
