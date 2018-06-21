@@ -17,4 +17,12 @@ contract CodaMusicCrowdsale is Crowdsale {
     wallet = _wallet;
     token = _token;
   }
+
+  function getDetails() public view returns (address, address, uint256, uint256) {
+    return (token, wallet, rate, weiRaised);
+  }
+
+  function getWeiRaised() view external returns (uint256) {
+    return _getTokenAmount(weiRaised);
+  }
 }
