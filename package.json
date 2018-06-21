@@ -1,7 +1,7 @@
 {
-  "name": "react-uport-box",
-  "version": "0.1.0",
-  "private": true,
+  "name": "Coda React",
+  "version": "0.0.1",
+  "private": false,
   "devDependencies": {
     "autoprefixer": "6.5.1",
     "babel-core": "6.17.0",

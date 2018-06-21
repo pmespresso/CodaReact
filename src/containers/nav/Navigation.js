@@ -55,7 +55,7 @@ class Navigation extends Component {
       <Navbar className="navbar" collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
-            <Link to="/" router.push className="nav-item">CODA</Link>
+            <Link to="/" className="nav-item">CODA</Link>
           </Navbar.Brand>
           <span ref="metamaskStatus">Metamask Status</span>
           <Navbar.Toggle />
