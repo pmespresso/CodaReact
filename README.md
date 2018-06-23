@@ -19,7 +19,6 @@ npm install
 npm start
 ```
 
-
 baby blue: #b8d1e1
 light lime green: #e3eb7b
 lime green: #96b60b

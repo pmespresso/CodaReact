@@ -19,7 +19,7 @@ import Funding from './components/funding/Funding';
 import KANYE_OFFERING_EXAMPLE from './components/discover/KANYEOFFERINGEXAMPLE';
 
 // Redux Store
-import store from './store'
+import store from './store';
 
 console.log('initial state => ', store.getState());
 //
