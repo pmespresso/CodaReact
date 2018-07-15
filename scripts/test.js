@@ -7,8 +7,21 @@ process.env.PUBLIC_URL = '';
 // https://github.com/motdotla/dotenv
 require('dotenv').config({silent: true});
 
+require('raf/polyfill');
+/*
+React 16 depends on the collection types Map and Set.
+If you support older browsers and devices which may not
+yet provide these natively (e.g. IE < 11) or which have
+non-compliant implementations (e.g. IE 11), consider including
+a global polyfill in your bundled application, such as core-js
+or babel-polyfill.
+*/
+require('core-js/es6/map');
+require('core-js/es6/set');
+
 const jest = require('jest');
 const argv = process.argv.slice(2);
+
 
 // Watch unless on CI or in coverage mode
 if (!process.env.CI && argv.indexOf('--coverage') < 0) {
@@ -26,6 +39,5 @@ process.stdout.write = function(chunk, encoding, callback) {
   }
   return realWrite.call(this, chunk, encoding, callback);
 };
-
 
 jest.run(argv);

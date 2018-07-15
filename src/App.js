@@ -29,14 +29,16 @@ import './css/oswald.css'
 import './css/open-sans.css'
 import './css/pure-min.css'
 import './App.css'
+import CssBaseline from '@material-ui/core/CssBaseline';
+
 
 class App extends Component {
-
   render() {
     return (
-
       <Provider store={store}>
         <div className="App">
+          <CssBaseline />
+
           <Router>
             <Navigation />
           </Router>

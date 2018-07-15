@@ -11,7 +11,7 @@ import icon_empower from './empower.png';
 import { fetchCrowdsales } from './actions/homeActions';
 import { connect } from 'react-redux';
 
-import { Crowdsales } from '../../components/crowdsale/Crowdsales';
+import { Crowdsales } from '../../containers/crowdsales/Crowdsales';
 
 class Home extends Component {
 
@@ -65,6 +65,14 @@ class Home extends Component {
     }
   }
 
+  componentDidMount() {
+    // fetch data from mongodb
+
+    //1 Fetch artistsWithOfferings object from mongodb, gridfs
+
+    // 2 Parse and set state with values
+  }
+
   render() {
     function FieldGroup({ id, label, help, ...props }) {
       return (
@@ -94,7 +102,7 @@ class Home extends Component {
           </Carousel>
         </div>
 
-      <main className="container">
+      <main className="container home">
         <section className="row">
         <div className="section-header">
           <h2> What is Coda? </h2>
@@ -141,9 +149,9 @@ class Home extends Component {
         <section className="row">
           <section id="discover-artists">
             <h2 className="section-header"> Discover Artists </h2>
-              <div className="cards-list">
 
-              </div>
+
+
           </section>
         </section>
 
