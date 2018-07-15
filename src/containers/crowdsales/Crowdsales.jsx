@@ -1,14 +1,22 @@
 import React from 'react';
 import _ from 'lodash';
 import Crowdsale from '../../components/crowdsale/Crowdsale';
+import Grid from '@material-ui/core/Grid';
 
 import '../../App.css';
+import { withStyles } from '@material-ui/core/styles';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { FETCH_CROWDSALES_FAILED, FETCH_CROWDSALES_STARTED, FETCH_CROWDSALES_SUCCEEDED, NEW_CROWDSALE_CREATED } from '../../actions/crowdsaleActions';
 
+const styles = {
+  cards: {
+    display: 'flex column',
+    alignItems: 'center'
+  }
+}
 class Crowdsales extends React.Component {
 
   render() {
@@ -18,20 +26,19 @@ class Crowdsales extends React.Component {
     // if (!query && !fetching) {
     //   return null;
     // }
-    console.log(crowdsales);
 
     if (fetching) {
       return (<p> Searching for crowdsales like {query}...</p>);
     }
 
     return (
-      <section className="cards">
+      <Grid container spacing={16} className="cards">
         {
           activeCrowdsales.map((item, key) => (
             <Crowdsale item={item} key={key} />
           ))
         }
-      </section>
+      </Grid>
     );
   }
 }
@@ -52,4 +59,4 @@ const mapDispatchToProps = (dispatch) => {
   )
 }
 
-export default connect(mapStateToProps)(Crowdsales);
+export default connect(mapStateToProps)(withStyles(styles)(Crowdsales));

@@ -7,13 +7,14 @@ import { Button, Panel } from 'react-bootstrap';
 import Crowdsales from '../crowdsales/Crowdsales';
 
 import '../../App.css';
+import { withStyles } from '@material-ui/core/styles';
 
 class DiscoverArtists extends React.Component {
   render() {
     return (
       <div>
         <PageHeader />
-        <section className="row">
+        <section>
           <Crowdsales {...this.props} />
         </section>
       </div>
