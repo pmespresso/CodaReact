@@ -13,10 +13,10 @@ import Home from './components/home/Home'
 import About from './components/about/About'
 import Dashboard from './components/dashboard/Dashboard'
 import Profile from './containers/user/Profile'
-import DiscoverArtists from './components/discover/DiscoverArtists';
+import DiscoverArtists from './containers/discover/DiscoverArtists';
 import Funding from './components/funding/Funding';
 
-import KANYE_OFFERING_EXAMPLE from './components/discover/KANYEOFFERINGEXAMPLE';
+import KANYE_OFFERING_EXAMPLE from './containers/discover/KANYEOFFERINGEXAMPLE';
 
 // Redux Store
 import store from './store';

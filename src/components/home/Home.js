@@ -11,9 +11,7 @@ import icon_empower from './empower.png';
 import { fetchCrowdsales } from './actions/homeActions';
 import { connect } from 'react-redux';
 
-import { Crowdsales } from '../../components/crowdsale/Crowdsales';
-
-import { CrowdsalesList } from '../../components/CrowdsalesList';
+import { Crowdsales } from '../../containers/crowdsales/Crowdsales';
 
 class Home extends Component {
 
