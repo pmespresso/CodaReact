@@ -8,14 +8,31 @@ import LogoutButtonContainer from '../user/ui/logoutbutton/LogoutButtonContainer
 import About from '../../components/about/About';
 
 import './Nav.css'
-import {Navbar, NavItem, Nav, MenuItem, NavDropdown} from 'react-bootstrap';
+import { withStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
 
 import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 
 import getWeb3 from '../../util/getWeb3';
 
-class Navigation extends Component {
+const styles = {
+  menuButton: {
+    marginLeft: -12,
+    marginRight: 20,
+  },
+  navItems: {
+    display: 'flexGrow',
+    alignItems: 'spaceBetween',
+    justifyContent: 'center'
+  }
+};
 
+class Navigation extends Component {
   constructor() {
     super();
     this.state = {
@@ -52,30 +69,35 @@ class Navigation extends Component {
 
   render() {
     return(
-      <Navbar className="navbar" collapseOnSelect>
-        <Navbar.Header>
-          <Navbar.Brand>
-            <Link to="/" className="nav-item">CODA</Link>
-          </Navbar.Brand>
-          <span ref="metamaskStatus">Metamask Status</span>
-          <Navbar.Toggle />
-        </Navbar.Header>
-        <Navbar.Collapse>
-            <Nav pullRight>
-              <NavLink to="/discover-artists" className="nav-item">
-                Discover Artists
-              </NavLink>
-              <NavLink to="/get-funded" className="nav-item">
-                Get Funded
-              </NavLink>
-              <NavLink to="/find-bounties" className="nav-item">
-                Find Bounties
-              </NavLink>
-            </Nav>
-        </Navbar.Collapse>
-      </Navbar>
+      <AppBar position="static" className="navbar" collapseOnSelect>
+        <Toolbar>
+          <IconButton className="nav-menu" color="inherit" aria-label="Menu">
+            <MenuIcon />
+          </IconButton>
+          <div className="navItems">
+            <Typography variant="title" color="inherit" className="navBrand">
+              <Link to="/" className="navItem">CODA</Link>
+            </Typography>
+            <Typography>
+              <span ref="metamaskStatus">Metamask Status</span>
+            </Typography>
+
+            <NavLink to="/discover-artists" className="navItem">
+              Discover Artists
+            </NavLink>
+            <NavLink to="/get-funded" className="navItem">
+              Get Funded
+            </NavLink>
+            <NavLink to="/find-bounties" className="navItem">
+              Find Bounties
+            </NavLink>
+
+            <Button color="inherit">Login</Button>
+          </div>
+        </Toolbar>
+      </AppBar>
     )
   }
 }
 
-export default Navigation;
+export default withStyles(styles)(Navigation);

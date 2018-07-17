@@ -2,47 +2,82 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 import PageHeader from '../page_header/PageHeader';
 import { withStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 
-import Grid from '@material-ui/core/Grid';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
+import Collapse from '@material-ui/core/Collapse';
+import Avatar from '@material-ui/core/Avatar';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import red from '@material-ui/core/colors/red';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import ShareIcon from '@material-ui/icons/Share';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import Button from '@material-ui/core/Button';
 
 import { Link } from 'react-router-dom';
 
 import '../../App.css';
 
-const styles = {
+const styles = theme => ({
   card: {
-    maxWidth: 345,
-    display: 'flex column'
+    maxWidth: 400,
   },
-  crowdsaleMedia: {
+  media: {
+    height: 0,
     paddingTop: '56.25%', // 16:9
   },
-};
+  actions: {
+    display: 'flex',
+  },
+  expand: {
+    transform: 'rotate(0deg)',
+    transition: theme.transitions.create('transform', {
+      duration: theme.transitions.duration.shortest,
+    }),
+    marginLeft: 'auto',
+  },
+  expandOpen: {
+    transform: 'rotate(180deg)',
+  },
+  avatar: {
+    backgroundColor: red[500],
+  }
+});
 
 class Crowdsale extends React.PureComponent {
+
   render () {
     const { item, key } = this.props;
 
     return (
-      <Grid item>
-        <Card key={key} className="card crowdsale">
-          <img src={item.img} className="media crowdsaleMedia" height={300}/>
-
-          <CardContent className="crowdsale-body">
-            <Typography variant="title" className="crowdsale-title">{item.title}</Typography>
-            <Typography variant="caption" className="crowdsale-caption"> {item.caption} </Typography>
-            <CardActions>
-              <Button className="crowdsale-button">View Offering</Button>
-            </CardActions>
-          </CardContent>
+        <Card key={item.img}>
+          <CardHeader
+             avatar={
+               <Avatar aria-label="Seller" className="seller-avatar">
+                 R
+               </Avatar>
+             }
+             action={
+               <IconButton>
+                 <MoreVertIcon />
+               </IconButton>
+             }
+             title={item.title}
+             subheader={item.posted_date.toString()}
+           />
+          <CardMedia
+            className="crowdsale-media"
+            image={item.img}
+            title={item.title}
+            height={100}
+          />
+          <CardContent> {item.caption} </CardContent>
         </Card>
-      </Grid>
     )
   }
 }

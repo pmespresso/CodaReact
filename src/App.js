@@ -15,6 +15,8 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import CodaMusicTokensRegistry from '../build/contracts/CodaMusicTokensRegistry.json'
 import getWeb3 from './util/getWeb3';
 
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
 //router history
 // import createBrowserHistory from 'history/createBrowserHistory'
 // const customHistory = createBrowserHistory()
@@ -31,6 +33,7 @@ import './css/pure-min.css'
 import './App.css'
 import CssBaseline from '@material-ui/core/CssBaseline';
 
+const theme = createMuiTheme();
 
 class App extends Component {
   render() {
@@ -38,10 +41,11 @@ class App extends Component {
       <Provider store={store}>
         <div className="App">
           <CssBaseline />
-
-          <Router>
-            <Navigation />
-          </Router>
+          <MuiThemeProvider theme={theme}>
+            <Router>
+              <Navigation />
+            </Router>
+          </MuiThemeProvider>
           {this.props.children}
         </div>
       </Provider>

@@ -10,25 +10,29 @@ const initialState = {
       title: "Yeezus",
       caption: "Kanye West's new album needs some more funding. Ye wants your help.",
       img: "/kanye.jpeg",
-      offeringLink: "/kanye_offering_example"
+      offeringLink: "/kanye_offering_example",
+      posted_date: Date.now()
     },
     {
       title: "Hip Country",
       caption: "Hip Hop meets country and blended into an summer banger for your trip to Mexico.",
       img: "/banjo.jpg",
-      offeringLink: "/hipcountry_offering_example"
+      offeringLink: "/hipcountry_offering_example",
+      posted_date: Date.now()
     },
     {
       title: "DJ Snake",
       caption: "William Sami Etienne Grigahcine, known professionally as DJ Snake, is a French DJ and record producer from Paris.",
       img: "/dj.jpg",
-      offeringLink: "/dj_offering_example"
+      offeringLink: "/dj_offering_example",
+      posted_date: Date.now()
     },
     {
       title: "Classical Ballad With a Twist",
       caption: "An indie band of classical musicians take a new twist because f*** the rules, be creative",
       img: "/violin.jpg",
-      offeringLink: "/classical_offering_example"
+      offeringLink: "/classical_offering_example",
+      posted_date: Date.now()
     }
   ],
   fetching: false,
