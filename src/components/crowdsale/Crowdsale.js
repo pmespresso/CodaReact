@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
-import PageHeader from '../page_header/PageHeader';
 import { withStyles } from '@material-ui/core/styles';
 
 import Card from '@material-ui/core/Card';
@@ -67,8 +66,8 @@ class Crowdsale extends React.PureComponent {
                  <MoreVertIcon />
                </IconButton>
              }
-             title={item.title}
-             subheader={item.posted_date.toString()}
+             title={<Typography variant="headline"> {item.title} </Typography>}
+             subheader={<Typography variant="subheading">{item.posted_date.toString()}</Typography>}
            />
           <CardMedia
             className="crowdsale-media"
@@ -77,6 +76,8 @@ class Crowdsale extends React.PureComponent {
             height={100}
           />
           <CardContent> {item.caption} </CardContent>
+
+          <Button containedPrimary> Learn More </Button>
         </Card>
     )
   }

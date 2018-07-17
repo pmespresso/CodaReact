@@ -1,6 +1,9 @@
 const styles = (theme) => ({
   navBar: {
     boxShadow: 'none',
+    backgroundColor: 'white',
+    color: 'black',
+    display: 'flexGrow'
   },
   navBarWrapper: {
     display: 'flex',

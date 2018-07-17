@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router'
-import { HiddenOnlyAuth, VisibleOnlyAuth } from '../../util/wrappers.js'
 
 // UI Components
-import LoginButtonContainer from '../user/ui/loginbutton/LoginButtonContainer'
-import LogoutButtonContainer from '../user/ui/logoutbutton/LogoutButtonContainer'
-import About from '../../components/about/About';
-
-import './Nav.css'
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -20,17 +14,7 @@ import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 
 import getWeb3 from '../../util/getWeb3';
 
-const styles = {
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
-  },
-  navItems: {
-    display: 'flexGrow',
-    alignItems: 'spaceBetween',
-    justifyContent: 'center'
-  }
-};
+import { styles } from './styles';
 
 class Navigation extends Component {
   constructor() {
@@ -64,35 +48,30 @@ class Navigation extends Component {
       this.refs.metamaskStatus.style.color = "#32CD32";
     } else {
       this.refs.metamaskStatus.style.color = "red";
+      console.log(this.refs.metamaskWalletAddress);
     }
   }
 
   render() {
     return(
-      <AppBar position="static" className="navbar" collapseOnSelect>
+      <AppBar position="static" className="navBar">
         <Toolbar>
-          <IconButton className="nav-menu" color="inherit" aria-label="Menu">
+          <IconButton className="menuButton" color="inherit" aria-label="Menu">
             <MenuIcon />
           </IconButton>
-          <div className="navItems">
-            <Typography variant="title" color="inherit" className="navBrand">
-              <Link to="/" className="navItem">CODA</Link>
-            </Typography>
-            <Typography>
-              <span ref="metamaskStatus">Metamask Status</span>
-            </Typography>
+          <Typography variant="title" color="inherit" className="navBrand">
+            <Link to="/" className="navBarLogo">CODA</Link>
+          </Typography>
+          <Typography variant="headline"><span ref="metamaskStatus">Metamask Status</span></Typography>
+          <Typography variant="headline"><span ref="metamaskWalletAddress">Searching for wallet...</span></Typography>
 
-            <NavLink to="/discover-artists" className="navItem">
-              Discover Artists
-            </NavLink>
+          <div className="pullRight">
             <NavLink to="/get-funded" className="navItem">
               Get Funded
             </NavLink>
             <NavLink to="/find-bounties" className="navItem">
               Find Bounties
             </NavLink>
-
-            <Button color="inherit">Login</Button>
           </div>
         </Toolbar>
       </AppBar>

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
-import PageHeader from '../../components/page_header/PageHeader';
 import { Button, Panel, Col, Row} from 'react-bootstrap';
 
 import { Link } from 'react-router-dom';
@@ -295,7 +294,6 @@ class Funding extends Component {
   render() {
     return (
       <div>
-        <PageHeader />
         <section className="row">
 
         {

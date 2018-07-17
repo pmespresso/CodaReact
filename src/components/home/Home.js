@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
-import { Carousel, FormGroup, Image, Col, FormControl, HelpBlock } from 'react-bootstrap';
-
+import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
@@ -17,7 +16,10 @@ import Crowdsales from '../../containers/crowdsales/Crowdsales';
 import { FETCH_CROWDSALES_FAILED, FETCH_CROWDSALES_STARTED, FETCH_CROWDSALES_SUCCEEDED, NEW_CROWDSALE_CREATED } from '../../actions/crowdsaleActions';
 
 const styles = {
-
+  gridsList: {
+    width: 500,
+    height: 450
+  }
 }
 
 class Home extends Component {
@@ -59,15 +61,6 @@ class Home extends Component {
     const { crowdsales } = this.props;
     const activeCrowdsales = crowdsales.active_crowdsales;
 
-    function FieldGroup({ id, label, help, ...props }) {
-      return (
-        <FormGroup controlId={id}>
-          <FormControl {...props} />
-          {help && <HelpBlock>{help}</HelpBlock>}
-        </FormGroup>
-      );
-    }
-
     return(
       <Grid spacing={32} container justify='center' className="container">
           <Grid xs={7} item id="discoverArtists">
@@ -77,12 +70,12 @@ class Home extends Component {
 
           <Grid xs={3} item id="production-help">
             <h5 className="section-header"> Find Opportunities to Collaborate </h5>
-            <GridList className="cards-list">
+            <GridList cellHeight={180} className="gridsList">
               {
                 this.state.productionAssistanceOptions.map((option, key) => {
                   return (
                     <GridListTile key={option.title}>
-                      <Image src={option.img} style={{maxWidth: '100%', zIndex: -100, position: 'absolute'}} />
+                      <img src={option.img} style={{maxWidth: '100%', zIndex: -100, position: 'absolute'}} />
                       <h1 style={{color: 'white', zIndex: 100}}>{option.title}</h1>
                     </GridListTile>
                   )
@@ -104,7 +97,7 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps)(withStyles(styles)(Home));
 
 // <div className="section-header">
 //   <h2> What is Coda? </h2>

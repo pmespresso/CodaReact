@@ -6,8 +6,6 @@ import { HiddenOnlyAuth, VisibleOnlyAuth } from './util/wrappers.js'
 import LoginButtonContainer from './containers/user/ui/loginbutton/LoginButtonContainer'
 import LogoutButtonContainer from './containers/user/ui/logoutbutton/LogoutButtonContainer'
 import Navigation from './containers/nav/Navigation';
-import {Navbar, NavItem, Nav, MenuItem, NavDropdown} from 'react-bootstrap';
-import About from './components/about/About';
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
@@ -32,9 +30,24 @@ import './css/open-sans.css'
 import './css/pure-min.css'
 import './App.css'
 import CssBaseline from '@material-ui/core/CssBaseline';
+import {indigo500, indigo700, redA200} from '@material-ui/core/colors';
 
-const theme = createMuiTheme();
-
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      light: '#757ce8',
+      main: '#3f50b5',
+      dark: '#002884',
+      contrastText: '#fff',
+    },
+    secondary: {
+      light: '#ff7961',
+      main: '#f44336',
+      dark: '#ba000d',
+      contrastText: '#000',
+    },
+  }
+});
 class App extends Component {
   render() {
     return (
