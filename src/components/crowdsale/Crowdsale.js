@@ -11,12 +11,12 @@ import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 import red from '@material-ui/core/colors/red';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import Button from '@material-ui/core/Button';
 
 import { Link } from 'react-router-dom';
 
@@ -48,36 +48,29 @@ const styles = theme => ({
   }
 });
 
+// action={
+//   <IconButton>
+//     <MoreVertIcon />
+//   </IconButton>
+// }
 class Crowdsale extends React.PureComponent {
 
   render () {
     const { item, key } = this.props;
 
     return (
-        <Card key={item.img}>
+        <Card key={item.img} height={380}>
           <CardHeader
-             avatar={
-               <Avatar aria-label="Seller" className="seller-avatar">
-                 R
-               </Avatar>
-             }
-             action={
-               <IconButton>
-                 <MoreVertIcon />
-               </IconButton>
-             }
-             title={<Typography variant="headline"> {item.title} </Typography>}
-             subheader={<Typography variant="subheading">{item.posted_date.toString()}</Typography>}
+             title={<Typography variant="headline" color="textSecondary"> {item.title} </Typography>}
+             subheader={<Typography variant="subheading" color="textSecondary">{item.posted_date.toISOString()}</Typography>}
            />
-          <CardMedia
-            className="crowdsale-media"
-            image={item.img}
-            title={item.title}
-            height={100}
-          />
-          <CardContent> {item.caption} </CardContent>
+          <CardContent style={{position: 'relative'}}>
+              <Typography style={{overflow: 'ellipsis', position: 'absolute', bottom: 15, left: 25, maxWidth: '70%'}}>
+                {item.caption}
+              </Typography>
+              <Button variant="contained" color="secondary" size="medium" style={{position: 'absolute', bottom: 15, right: 25}}> Learn More </Button>
 
-          <Button containedPrimary> Learn More </Button>
+          </CardContent>
         </Card>
     )
   }

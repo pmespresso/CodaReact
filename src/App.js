@@ -29,38 +29,23 @@ import './css/oswald.css'
 import './css/open-sans.css'
 import './css/pure-min.css'
 import './App.css'
-import CssBaseline from '@material-ui/core/CssBaseline';
-import {indigo500, indigo700, redA200} from '@material-ui/core/colors';
 
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      light: '#757ce8',
-      main: '#3f50b5',
-      dark: '#002884',
-      contrastText: '#fff',
-    },
-    secondary: {
-      light: '#ff7961',
-      main: '#f44336',
-      dark: '#ba000d',
-      contrastText: '#000',
-    },
-  }
-});
+import codaTheme from './config/theme';
+
+const theme = createMuiTheme(codaTheme)
+
 class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <div className="App">
-          <CssBaseline />
-          <MuiThemeProvider theme={theme}>
-            <Router>
-              <Navigation />
-            </Router>
-          </MuiThemeProvider>
-          {this.props.children}
-        </div>
+        <MuiThemeProvider theme={theme}>
+          <div className="App">
+              <Router>
+                <Navigation />
+              </Router>
+            {this.props.children}
+          </div>
+        </MuiThemeProvider>
       </Provider>
     );
   }
