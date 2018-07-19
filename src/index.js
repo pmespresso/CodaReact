@@ -12,7 +12,8 @@ import App from './App'
 import Home from './components/home/Home'
 import Dashboard from './components/dashboard/Dashboard'
 import Profile from './containers/user/Profile'
-import Funding from './components/funding/Funding';
+import Funding from './containers/funding/Funding';
+import Wallet from './containers/wallet/Wallet';
 
 // Redux Store
 import store from './store';
@@ -29,7 +30,8 @@ ReactDOM.render((
           <Route path="dashboard" component={UserIsAuthenticated(Dashboard)} />
           <Route path="profile" component={UserIsAuthenticated(Profile)} />
           <Route path="/get-funded" component={Funding}/>
-          <Route path="/find-bounties"/>
+          <Route path="/find-bounties" />
+          <Route path="/wallet" component={Wallet} />
         </Route>
       </Router>
     </Provider>

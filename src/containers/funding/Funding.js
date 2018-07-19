@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
-import { Button, Panel, Col, Row} from 'react-bootstrap';
+
+import { Grid, Button, CardHeader, Card, CardContent } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 
 import { Link } from 'react-router-dom';
+
+import TokenInputs from './components/TokenInputs';
+import CrowdsaleInputs from './components/CrowdsaleInputs';
+import Wallet from '../../containers/wallet/Wallet';
+
+import { connect } from 'react-redux';
 
 import CodaMusicTokensRegistry from '../../../build/contracts/CodaMusicTokensRegistry.json';
 
@@ -11,8 +19,6 @@ import CodaMusicCrowdsalesRegistry from '../../../build/contracts/CodaMusicCrowd
 import TruffleContract from 'truffle-contract';
 
 import getWeb3 from '../../util/getWeb3';
-
-// import { fetchCrowdsales } from '../../actions';
 
 import '../../App.css';
 
@@ -29,7 +35,8 @@ class Funding extends Component {
       tokens: [],
       crowdsales: [],
       web3Provider: null,
-      zipTokensAndUserTokenBalances: {}
+      zipTokensAndUserTokenBalances: {},
+      stage: 'token'
     }
 
     this.handleCreateToken = this.handleCreateToken.bind(this);
@@ -58,8 +65,6 @@ class Funding extends Component {
   }
 
   componentDidMount = () => {
-    const { dispatch } = this.props;
-    // dispatch(fetchCrowdsales())
   }
 
   instantiateContract = () => {
@@ -277,6 +282,12 @@ class Funding extends Component {
       })
     }
 
+    handleInputChange = (name) => ({ target: { value } }) => {
+      this.setState({
+        [name]: value
+      });
+    }
+
     handleCrowdsaleConfig = () => {
       this.setState({
         stage: 'crowdsale'
@@ -293,122 +304,26 @@ class Funding extends Component {
 
   render() {
     return (
-      <div>
-        <section className="row">
-
+      <Grid container spacing={16} justify='center'>
+        <Grid item md={5} className="launchConfig">
         {
-          this.state.stage === 'crowdsale'
+          this.state.stage === 'token'
           ?
-            <Col md={5}>
-              <Panel style={{height: 600, textAlign: 'center'}}>
-                <Panel.Title><h2>Launch Your Crowdsale</h2></Panel.Title>
-                <Panel.Body style={{display: 'flex column'}}>
-                <strong>Token to Sell: </strong><input type="text" className="form-control bottom-margin-20" id="SetCrowdSaleToken" ref="SetCrowdSaleToken" placeholder="e.g. 0x230dsa9191f2190ds414ah3fjdfa12"/>
-                <strong>Crowdsale Wallet: </strong><input type="text" className="form-control bottom-margin-20" id="SetCrowdSaleWallet" ref="SetCrowdSaleWallet" placeholder="e.g. 0x230dsa9191f2190ds414ah3fjdfa12"/>
-
-                <strong>Token Price per Unit (in ETH): </strong><input type="text" className="form-control bottom-margin-20" id="SetTokenPrice" ref="SetTokenPrice" placeholder="e.g. 3"/>
-                <strong>Total Goal: (ETH)</strong><input type="text" className="form-control bottom-margin-20" id="SetGoal" ref="SetGoal" placeholder="e.g. 400"/>
-                <strong>Crowdsale Duration: </strong><input type="text" className="form-control bottom-margin-20" id="SetDuration" ref="SetDuration" placeholder="e.g. 30 days"/>
-                <strong>Minimum Threshold: (as a % of Total Goal)</strong><input type="text" className="form-control bottom-margin-20" id="MinimumThreshold" ref="MinimumThreshold" placeholder="e.g. 30% of Total Goal"/>
-                </Panel.Body>
-
-                <Panel.Body> If crowdsale address is different from the account address you deployed your tokens from, you'll have to send your tokens to the Crowdsale address manually. </Panel.Body>
-              </Panel>
-              <Button className="pull-left" id="backToTokenConfig" onClick={this.backToTokenConfig}>Back to Token</Button>
-              <Button className="pull-right" id="launchCrowdsale" onClick={this.deployCrowdsale}>Launch Crowdsale</Button>
-            </Col>
+          <TokenInputs handleCreateToken={this.handleCreateToken} handleCrowdsaleConfig={this.handleCrowdsaleConfig} />
           :
-          <Col md={5}>
-            <Panel style={{height: 600, textAlign: 'center'}}>
-              <Panel.Title><h2>Create A New Token For Your Album</h2></Panel.Title>
-              <Panel.Body style={{display: 'flex column'}}>
-                <div><strong>Album or Project Title: </strong><input type="text" className="form-control bottom-margin-20" ref="SetProjectTitle" placeholder="e.g. Radio Nights"/></div>
-                <div><strong>Artist or Band Name: </strong><input type="text" className="form-control bottom-margin-20" ref="SetArtistName" placeholder="e.g. Chance the Rapper"/></div>
-                <div><strong>Artist Ethereum Wallet: </strong><input type="text" className="form-control bottom-margin-20" ref="SetArtistWallet" placeholder="e.g. 0x16B0dc30B9aD80Fb6fC352496CAaCA64ED082e9c"/></div>
-                <div><strong>Set Token Symbol: </strong><input type="text" className="form-control bottom-margin-20" ref="SetTokenSymbol" placeholder="e.g. RDN"/></div>
-                <div><strong>Token Supply: </strong><input type="text" className="form-control bottom-margin-20" ref="SetTokenSupply" placeholder="e.g. 200000000"/></div>
-                <button onClick={this.handleCreateToken} className="btn btn-lg btn-success pull-right" ref="createNewProjectOfferingButton">Deploy Token</button>
-              </Panel.Body>
-            </Panel>
-            <Button className="pull-right" id="crowdsale_configuration" onClick={this.handleCrowdsaleConfig}>Start Crowdsale Configuration</Button>
-          </Col>
+          <CrowdsaleInputs handleCreateToken={this.handleCreateToken} handleCrowdsaleConfig={this.handleCrowdsaleConfig} />
         }
+        </Grid>
 
-            <div className="col-md-5">
-              <div className="card card-default">
-                <div className="card-heading">
-                  <h3 className="card-title">Your Wallet</h3>
-                </div>
-                <div className="card-body">
-                  <p className="bottom-margin-20"><strong>Your Wallet Address: </strong> <span id="userWalletAddress" ref="userWalletAddress">{this.state.userWalletAddress}</span></p> <br/>
-
-                  <div id="userTokenOverview" ref="userTokenOverview" style={{display: 'flex'}}>
-                    <strong>Your Tokens: </strong>
-
-                    <ul id="userTokenAddresses" ref="userTokenAddresses" style={{listStyleType: 'none'}}>
-                    {
-                      this.state.tokens.map((token, key) => {
-                        return (
-                          <li key={key}> {token.token_address} </li>
-                        )
-                      })
-                    }
-                    </ul>
-                    <ul id="userTokenSymbols" style={{listStyleType: 'none'}}>
-                    {
-                      this.state.tokens.map((token, key) => {
-                        return (
-                          <li key={key}> {token.symbol} </li>
-                        )
-                      })
-                    }
-                    </ul>
-                    <ul id="userTokenBalances" style={{listStyleType: 'none'}}>
-                    {
-                      this.state.userTokenBalances.map((balance, key) => {
-                        return (
-                          <li key={key}> {balance.toNumber()} </li>
-                        )
-                      })
-                    }
-                    </ul>
-
-                  </div>
-                </div>
-              </div>
-            </div>
-        </section>
-
-        <section className="row">
-          <div className="col-md-5">
-            <div className="card card-default">
-              <div className="card-heading">
-                <h3 className="card-title">Crowdsales</h3>
-              </div>
-              <div className="card-body">
-                <div id="userCrowdsaleOverview" ref="userTokenOverview" style={{display: 'flex'}}>
-                  <strong>Your Launched Crowdsales: </strong>
-
-                  <ul id="userCrowdsaleAddresses" ref="userCrowdsaleAddresses" style={{listStyleType: 'none'}}>
-                  {
-                    this.state.crowdsales.map((crowdsale, key) => {
-                      return (
-                        <li key={key}> Crowdsale: {crowdsale.crowdsale_address} Token: {crowdsale.token_address} </li>
-                      )
-                    })
-                  }
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-    </div>
+        <Grid item md={5} className="wallet">
+          <Wallet />
+        </Grid>
+    </Grid>
     )
   }
 }
 
-export default Funding;
+export default connect()(Funding);
 
 
 // <ul id="userTokenSymbols" ref="userTokenSymbols">

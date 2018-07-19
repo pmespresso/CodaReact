@@ -1,33 +1,35 @@
 import React, { Component } from 'react';
 
 import { withStyles } from '@material-ui/core/styles'
-import Grid from '@material-ui/core/Grid';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
 
-import icon_discover from './discover.png';
-import icon_invest from './invest.png';
-import icon_empower from './empower.png';
+import AppBar from '@material-ui/core/AppBar';
+import Grid from '@material-ui/core/Grid'
+import GridList from '@material-ui/core/GridList'
+import GridListTile from '@material-ui/core/GridListTile'
+import Button from '@material-ui/core/Button'
+import Tab from '@material-ui/core/Tab'
+import Typography from '@material-ui/core/Typography'
+
+import SimpleTabs from '../tabs/SimpleTabs';
 
 import { connect } from 'react-redux';
-
 import Crowdsales from '../../containers/crowdsales/Crowdsales';
-
 import { FETCH_CROWDSALES_FAILED, FETCH_CROWDSALES_STARTED, FETCH_CROWDSALES_SUCCEEDED, NEW_CROWDSALE_CREATED } from '../../actions/crowdsaleActions';
 
 const styles = {
-  gridsList: {
-    width: 500,
-    height: 450
+  body: {
+    marginTop: 90
   }
 }
 
+// @withStyles
 class Home extends Component {
 
   constructor() {
     super();
 
     this.state = {
+      value: 0,
       productionAssistanceOptions: [
         {
           title: 'Producers',
@@ -62,27 +64,30 @@ class Home extends Component {
     const activeCrowdsales = crowdsales.active_crowdsales;
 
     return(
-      <Grid spacing={32} container justify='center' className="container">
-          <Grid xs={7} item id="discoverArtists">
-            <h4 className="sectionHeader"> Current Artist Offerings </h4>
-            <Crowdsales />
-          </Grid>
+      <Grid spacing={32} container justify='center' className="body" style={{marginTop: 50, padding: 0}}>
+        <Grid xs={12} md={6} lg={6} item>
+            <SimpleTabs>
+              <Crowdsales />
+            </SimpleTabs>
+        </Grid>
 
-          <Grid xs={3} item id="production-help">
-            <h5 className="section-header"> Find Opportunities to Collaborate </h5>
-            <GridList cellHeight={180} className="gridsList">
-              {
-                this.state.productionAssistanceOptions.map((option, key) => {
-                  return (
-                    <GridListTile key={option.title}>
-                      <img src={option.img} style={{maxWidth: '100%', zIndex: -100, position: 'absolute'}} />
-                      <h1 style={{color: 'white', zIndex: 100}}>{option.title}</h1>
-                    </GridListTile>
-                  )
-                })
-              }
-            </GridList>
-          </Grid>
+        <Grid xs={12} md={4} lg={4} item id="production-help">
+          <Typography variant="headline" color="inherit"> Find Opportunities to Collaborate </Typography>
+          <GridList cellHeight={240} cols={2} className="gridsList">
+            {
+              this.state.productionAssistanceOptions.map((option, key) => {
+                return (
+                  <GridListTile key={option.title} cols={1}>
+                    <Button size="large">
+                      <img src={option.img} style={{ }} />
+                      <Typography variant="title">{option.title}</Typography>
+                    </Button>
+                  </GridListTile>
+                )
+              })
+            }
+          </GridList>
+        </Grid>
     </Grid>
     )
   }
@@ -97,7 +102,7 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps)(withStyles(styles)(Home));
+export default connect(mapStateToProps)(Home);
 
 // <div className="section-header">
 //   <h2> What is Coda? </h2>

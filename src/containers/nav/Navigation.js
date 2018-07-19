@@ -3,18 +3,13 @@ import { Link } from 'react-router'
 
 // UI Components
 import { withStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+import { Grid, MenuIcon, IconButton, Button, Typography, Toolbar, AppBar } from '@material-ui/core';
 
 import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 
 import getWeb3 from '../../util/getWeb3';
 
-import { styles } from './styles';
+import styles from './styles';
 
 class Navigation extends Component {
   constructor() {
@@ -56,23 +51,35 @@ class Navigation extends Component {
     return(
       <AppBar position="static" className="navBar">
         <Toolbar>
-          <IconButton className="menuButton" color="inherit" aria-label="Menu">
-            <MenuIcon />
-          </IconButton>
           <Typography variant="title" color="inherit" className="navBrand">
             <Link to="/" className="navBarLogo">CODA</Link>
           </Typography>
-          <Typography variant="headline"><span ref="metamaskStatus">Metamask Status</span></Typography>
-          <Typography variant="headline"><span ref="metamaskWalletAddress">Searching for wallet...</span></Typography>
 
-          <div className="pullRight">
-            <NavLink to="/get-funded" className="navItem">
-              Get Funded
-            </NavLink>
-            <NavLink to="/find-bounties" className="navItem">
-              Find Bounties
-            </NavLink>
-          </div>
+          <Grid container justify='center' spacing={24}>
+            <Grid item>
+              <Typography className="navItem" variant="title"><span ref="metamaskStatus">Metamask Status</span></Typography>
+            </Grid>
+            <Grid item>
+              <Typography className="navItem" variant="title"><span ref="metamaskWalletAddress">Searching for wallet...</span></Typography>
+            </Grid>
+          </Grid>
+
+          <Grid container justify='flex-end' spacing={40}>
+            <Grid item>
+              <NavLink to="/get-funded" className="navItem">
+                <Typography variant="title">
+                  Get Funded
+                </Typography>
+              </NavLink>
+            </Grid>
+            <Grid item>
+              <NavLink to="/find-bounties" className="navItem">
+                <Typography variant="title">
+                  Find Bounties
+                </Typography>
+              </NavLink>
+            </Grid>
+          </Grid>
         </Toolbar>
       </AppBar>
     )
