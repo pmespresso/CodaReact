@@ -41,14 +41,14 @@ export default function(state = initialState, action) {
       return {
         ...state,
         addresses: action.payload,
-        lastFetch: Date.now(),
+        lastFetch: moment().format('MMMM Do YYYY, h:mm:ss a'),
         lastErr: '',
         error: ''
       }
     case WALLET_SYNC_FAILED:
       return {
         ...state,
-        lastErr: Date.now(),
+        lastErr: moment().format('MMMM Do YYYY, h:mm:ss a'),
         error: action.payload
       }
     default:

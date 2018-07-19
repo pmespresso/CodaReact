@@ -17,34 +17,16 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import Grid from '@material-ui/core/Grid';
 
 import { Link } from 'react-router-dom';
 
 import '../../App.css';
 
 const styles = theme => ({
-  card: {
-    maxWidth: 400,
-  },
   media: {
     height: 0,
     paddingTop: '56.25%', // 16:9
-  },
-  actions: {
-    display: 'flex',
-  },
-  expand: {
-    transform: 'rotate(0deg)',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
-    marginLeft: 'auto',
-  },
-  expandOpen: {
-    transform: 'rotate(180deg)',
-  },
-  avatar: {
-    backgroundColor: red[500],
   }
 });
 
@@ -59,19 +41,16 @@ class Crowdsale extends React.PureComponent {
     const { item, key } = this.props;
 
     return (
-        <Card key={item.img} height={380}>
-          <CardHeader
-             title={<Typography variant="headline" color="textSecondary"> {item.title} </Typography>}
-             subheader={<Typography variant="subheading" color="textSecondary">{item.posted_date.toISOString()}</Typography>}
-           />
-          <CardContent style={{position: 'relative'}}>
-              <Typography style={{overflow: 'ellipsis', position: 'absolute', bottom: 15, left: 25, maxWidth: '70%'}}>
-                {item.caption}
-              </Typography>
-              <Button variant="contained" color="secondary" size="medium" style={{position: 'absolute', bottom: 15, right: 25}}> Learn More </Button>
-
-          </CardContent>
+      <Grid item key={item.img}>
+        <Card style={{position: 'relative', height: 200}}>
+          <Grid item style={{padding: 30}}>
+            <Typography variant="headline" color="textSecondary"> {item.title} </Typography>
+            <Typography variant="subheading" color="textSecondary">Created: {item.posted_date}</Typography>
+            <Typography>{item.caption}</Typography>
+          </Grid>
+          <Button variant="contained" color="secondary" size="medium" style={{position: 'absolute', bottom: 15, right: 25}}> Learn More </Button>
         </Card>
+      </Grid>
     )
   }
 }
