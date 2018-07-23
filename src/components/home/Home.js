@@ -9,6 +9,7 @@ import GridListTile from '@material-ui/core/GridListTile'
 import Button from '@material-ui/core/Button'
 import Tab from '@material-ui/core/Tab'
 import Typography from '@material-ui/core/Typography'
+import GridListTileBar from '@material-ui/core/GridListTileBar'
 
 import SimpleTabs from '../tabs/SimpleTabs';
 
@@ -59,6 +60,7 @@ class Home extends Component {
     }
   }
 
+
   render() {
     const { crowdsales } = this.props;
     const activeCrowdsales = crowdsales.active_crowdsales;
@@ -72,26 +74,32 @@ class Home extends Component {
         </Grid>
 
         <Grid xs={12} md={4} lg={4} item id="production-help">
-          <Typography variant="headline" color="inherit"> Find Opportunities to Collaborate </Typography>
-          <GridList cellHeight={240} cols={2} className="gridsList">
-            {
-              this.state.productionAssistanceOptions.map((option, key) => {
-                return (
-                  <GridListTile key={option.title} cols={1}>
-                    <Button size="large">
-                      <img src={option.img} style={{ }} />
-                      <Typography variant="title">{option.title}</Typography>
-                    </Button>
-                  </GridListTile>
-                )
-              })
-            }
-          </GridList>
+          <FindCollaborators productionAssistanceOptions={this.state.productionAssistanceOptions}/>
         </Grid>
     </Grid>
     )
   }
 }
+
+const FindCollaborators = ({productionAssistanceOptions}) => (
+  <div>
+    <Typography variant="headline" color="inherit" style={{marginBottom: 25}}> Find Opportunities to Collaborate </Typography>
+    <GridList cellHeight={140} cols={2} className="gridsList">
+      {
+        productionAssistanceOptions.map((option, key) => {
+          return (
+              <GridListTile key={option.title} cols={1}>
+                <img src={option.img} style={{ width: '100%'}} />
+                  <GridListTileBar
+                    title={option.title}
+                  />
+              </GridListTile>
+          )
+        })
+      }
+    </GridList>
+  </div>
+)
 
 const mapStateToProps = (state) => {
   return {

@@ -1,25 +1,26 @@
 import React from 'react';
 import _ from 'lodash';
-
 import Crowdsale from '../../components/crowdsale/Crowdsale';
+
 import List from '@material-ui/core/List';
+
+import '../../App.css';
 import { withStyles } from '@material-ui/core/styles';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { FETCH_CROWDSALES_FAILED, FETCH_CROWDSALES_STARTED, FETCH_CROWDSALES_SUCCEEDED, NEW_CROWDSALE_CREATED } from '../../actions/crowdsaleActions';
 
-// const styles = theme => ({
-//   root: {
-//     width: '100%',
-//     backgroundColor: theme.palette.background.paper,
-//     paddingTop: 0
-//   }
-// });
+const styles = theme => ({
+  root: {
+    width: '100%',
+    backgroundColor: theme.palette.background.paper
+  }
+});
 
 class Crowdsales extends React.Component {
   render() {
-    const { crowdsales, query, fetching } = this.props;
+    const { crowdsales, query, fetching, sortBy } = this.props;
     const activeCrowdsales = crowdsales.active_crowdsales;
 
     // if (!query && !fetching) {
@@ -31,9 +32,15 @@ class Crowdsales extends React.Component {
     }
 
     return (
-      <List className="root" style={{padding: 0}}>
+      <List className="root">
         {
+          sortBy === "POPULAR"
+          ?
           activeCrowdsales.map((item, key) => (
+            <Crowdsale item={item} key={key} />
+          ))
+          :
+          _.sortBy(activeCrowdsales, ['posted_date']).map((item, key) => (
             <Crowdsale item={item} key={key} />
           ))
         }
@@ -50,4 +57,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(Crowdsales);
+export default connect(mapStateToProps)(withStyles(styles)(Crowdsales));
