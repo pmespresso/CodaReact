@@ -29,9 +29,9 @@ class Navigation extends Component {
         web3: results.web3
       }, function() {
         console.log('done setting web3 => ', this.state.web3)
+        // Instantiate contract once web3 provided.
+        this.checkMetamask();
       });
-      // Instantiate contract once web3 provided.
-      this.checkMetamask();
     })
     .catch(() => {
       console.log('Error finding web3.')
@@ -39,7 +39,7 @@ class Navigation extends Component {
   }
 
   checkMetamask = () => {
-    if (this.state.web3 !== 'undefined') {
+    if (this.state.web3 !== null) {
       this.refs.metamaskStatus.style.color = "#32CD32";
     } else {
       this.refs.metamaskStatus.style.color = "red";

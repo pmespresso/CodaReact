@@ -12,35 +12,35 @@ const initialState = {
       caption: "Kanye West's new album needs some more funding. Ye wants your help.",
       img: "/kanye.jpeg",
       offeringLink: "/kanye_offering_example",
-      posted_date: moment().format('MMMM Do YYYY, h:mm:ss a')
+      posted_date: moment().format('MMMM Do YYYY')
     },
     {
       title: "Hip Country",
       caption: "Hip Hop meets country and blended into an summer banger for your trip to Mexico.",
       img: "/banjo.jpg",
       offeringLink: "/hipcountry_offering_example",
-      posted_date: moment().format('MMMM Do YYYY, h:mm:ss a')
+      posted_date: moment().format('MMMM Do YYYY')
     },
     {
       title: "DJ Snake",
       caption: "William Sami Etienne Grigahcine, known professionally as DJ Snake, is a French DJ and record producer from Paris.",
       img: "/dj.jpg",
       offeringLink: "/dj_offering_example",
-      posted_date: moment().format('MMMM Do YYYY, h:mm:ss a')
+      posted_date: moment().format('MMMM Do YYYY')
     },
     {
       title: "Classical Ballad With a Twist",
       caption: "An indie band of classical musicians take a new twist because f*** the rules, be creative",
       img: "/violin.jpg",
       offeringLink: "/classical_offering_example",
-      posted_date: moment().format('MMMM Do YYYY, h:mm:ss a')
+      posted_date: moment().format('MMMM Do YYYY')
     },
     {
       title: "Yeezus",
       caption: "Kanye West's new album needs some more funding. Ye wants your help.",
       img: "/kanye.jpeg",
       offeringLink: "/kanye_offering_example",
-      posted_date: moment().format('MMMM Do YYYY, h:mm:ss a')
+      posted_date: moment().format('MMMM Do YYYY')
     },
     {
       title: "Hip Country",
@@ -65,7 +65,8 @@ const initialState = {
     }
   ],
   fetching: false,
-  query: null
+  query: null,
+  sortBy: 'POPULAR'
 }
 
 export default function(state = initialState, action) {

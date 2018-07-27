@@ -13,6 +13,8 @@ import {
   ENCRYPT_WALLET_FAILED
 } from './actions/walletActions';
 
+import moment from 'moment';
+
 const initialState = {
   addresses: [],
   current_user: '',

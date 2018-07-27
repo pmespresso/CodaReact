@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
+import _ from 'lodash';
+
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
@@ -21,24 +24,26 @@ class SimpleTabs extends React.Component {
   };
 
   handleChange = (event, value) => {
+
     this.setState({ value });
   };
 
   render() {
     const { value } = this.state;
-    const popularCrowdsales = this.props.children;
+    const allCrowdsales = this.props.children;
+    const newestCrowdsales = null;
 
     return (
       <div className="tabsWrapper">
         <AppBar position="static">
           <Tabs value={value} onChange={this.handleChange}>
-            <Tab label="Popular" />
-            <Tab label="Newest" />
+            <Tab label={<Typography variant="title">Popular</Typography>} />
+            <Tab label={<Typography variant="title">Newest</Typography>} />
           </Tabs>
         </AppBar>
 
-        {value === 0 && <TabContainer>{popularCrowdsales}</TabContainer>}
-        {value === 1 && <TabContainer>Item Two</TabContainer>}
+        {value === 0 && <TabContainer>{allCrowdsales}</TabContainer>}
+        {value === 1 && <TabContainer>{newestCrowdsales}</TabContainer>}
         {value === 2 && <TabContainer>Item Three</TabContainer>}
       </div>
     );
