@@ -1,4 +1,4 @@
-pragma solidity ^0.4.19;
+pragma solidity ^0.4.24;
 import './CodaMusicToken.sol';
 
 contract CodaMusicTokensRegistry {
@@ -17,6 +17,9 @@ contract CodaMusicTokensRegistry {
     uint256 balance
   );
 
+  // DEV ONLY
+  address ceo = address(0x2E5C5c5e122c0A41Da6c3C1bD4e2F95AC714d9d7);
+
   /* mapping (user address => token addresses) public owners; */
   mapping (address => address[]) public owners;
   //mapping of token addresses to mapping of accounts to their balances (token=0 means Ether)
@@ -25,12 +28,20 @@ contract CodaMusicTokensRegistry {
   /* one to one mapping of token to owner */
   mapping(address => address) public tokenToOwner;
 
-  modifier onlyCEO() {
+  // DEV ONLY
+  modifier onlyCEO(address callerAddress) {
+    require(callerAddress == ceo, "Only the CEO can call this function");
     _;
   }
 
-  modifier onlyTokenOwner() {
-    //TODO:
+  modifier onlyTokenOwner(address ownerAddress, address tokenAddress) {
+    bool tokenFound = false;
+    for (uint256 i = 0; i < owners[ownerAddress].length; i++) {
+      if (owners[ownerAddress][i] == tokenAddress) {
+        tokenFound = true;
+      }
+    }
+    require(tokenFound, "only the token owner can call this function. Check you are logged into the correct account and try again.");
     _;
   }
 
@@ -80,7 +91,7 @@ contract CodaMusicTokensRegistry {
     return token.getDetails();
 	}
 
-  function burnToken(address _token, uint256 _value) public onlyTokenOwner() {
+  function burnToken(address _token, uint256 _value) public onlyTokenOwner(msg.sender, _token) {
     CodaMusicToken(_token).burn(_value);
   }
 

@@ -1,6 +1,6 @@
 //this standard is based on ethereum
 //https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20.md
-pragma solidity ^0.4.19;
+pragma solidity ^0.4.24;
 
 import 'openzeppelin-solidity/contracts/token/ERC20/StandardToken.sol';
 import 'openzeppelin-solidity/contracts/token/ERC20/BurnableToken.sol';
